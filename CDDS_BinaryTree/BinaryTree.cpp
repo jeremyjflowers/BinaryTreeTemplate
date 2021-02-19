@@ -9,39 +9,80 @@ BinaryTree::~BinaryTree()
 void BinaryTree::insert(int value)
 {
 	//If the tree is empty, set the root to be a new node with the given value.
+	if (m_root == nullptr)
+	{
+		*m_root = value;
+	}
 
 	//Create a TreeNode pointer that will act as an iterator pointing to the current node and set it to the root.
-	//Create a TreeNode pointer that will act as an iterator pointing to the parent 
-	//of the current node and set it to the root.
+	TreeNode* currentNode;
+	currentNode = m_root;
+	//Create a TreeNode pointer that will act as an iterator pointing to the parent of the current node and set it to the root.
+	TreeNode* parentNode;
+	parentNode = m_root;
 
 	//Loop until the the current node iterator reaches a nullptr.
+	if(currentNode)
+	{
 		//Check if the value we want to add to the tree is less than the value at the current node.
+		if (currentNode->hasLeft())
+		{
 			//Set the parent node to be the current node before the current node moves positions.
+			parentNode = currentNode;
 			//Change the current node to be the child to its left and continue.
+			currentNode->getLeft();
+		}
 
 		//Check if the value we want to add to the tree is greater than the value at the current node.
+		if (currentNode->hasRight())
+		{
 			//Set the parent node to be the current node before the current node moves positions.
+			parentNode = currentNode;
 			//Change the current node to be the child to its right and continue.
+			currentNode->getRight();
+		}
 
 		//If the value is the same as a value already in the list return 
+		if (currentNode->getData() == value)
+		{
+			return;
+		}
 
+	}
 	//end loop
 
 	//If the value we want to add is less than the value of the parent node, insert the value to the left.
+	if (parentNode->getData() < value)
+	{
+		parentNode->setLeft(currentNode);
+	}
 	//Otherwise, insert the value to the right.
+	else
+	{
+		parentNode->setRight(currentNode);
+	}
 }
 
 void BinaryTree::remove(int value)
 {
 	//Create two TreeNode pointers: one to hold a reference to the node we want to remove
+	TreeNode* currentNode;
 	//and another to hold a reference to its parent.
+	TreeNode* parentNode;
 
 	//Try to find the node that matches the value given and its parent in the tree.
-	//If the node cannot be found return.
 
+	//If the node cannot be found return.
+	if (!currentNode)
+	{
+		return;
+	}
 
 	//Check to see if the node has a right
+	if(currentNode->hasRight())
+	{
 
+	}
 		//Initialize two iterators to find the node whose data will be copied and its parent.
 
 		//Set the first iterator to point to the right child of the node we want to remove.
@@ -84,21 +125,26 @@ void BinaryTree::remove(int value)
 TreeNode* BinaryTree::find(int value)
 {
 	//Initialize an iterator starting at the root.
-
+	int iterator;
 	//Loop through the tree while the iterator isn't nullptr.
+	while (iterator != nullptr)
+	{
 		//Check if the node has the data we want
 			//Return the iterator
 		//If the node doesn't have the data we want, check to see if it's higher in value.
 			//Set the iterator to be its current right child.
 		//If the node doesn't have the data we want, check to see if it's lower in value.
 			//Set the iterator to be its current left child.
+	}
 	//end loop
 
 	//Return nullptr
+	return nullptr;
 }
 
 void BinaryTree::draw(TreeNode* selected)
 {
+	draw(m_root, 400, 40, 400, selected);
 }
 
 bool BinaryTree::findNode(int searchValue, TreeNode*& nodeFound, TreeNode*& nodeParent)
@@ -123,4 +169,28 @@ bool BinaryTree::findNode(int searchValue, TreeNode*& nodeFound, TreeNode*& node
 
 void BinaryTree::draw(TreeNode* currentNode, int x, int y, int horizontalSpacing, TreeNode* selected)
 {
+	//Decrease the horizontal space as the nodes draw
+	horizontalSpacing /= 2;
+
+	//Checks if the current node is null
+	if (currentNode)
+	{
+		//Draws the left child if this node has one
+		if (currentNode->hasLeft())
+		{
+			//Draws a line between the left child and the current node
+			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
+			//Draws the left child
+			draw(currentNode->getLeft(), x - horizontalSpacing, y + 80, horizontalSpacing, selected);
+		}
+
+		//Draws the right child if this node has one
+		if (currentNode->hasRight())
+		{
+			DrawLine(x, y, x - horizontalSpacing, y + 80, RED);
+			draw(currentNode->getRight(), x + horizontalSpacing, y + 80, horizontalSpacing, selected);
+		}
+		//Draws the current node
+		currentNode->draw(x, y, (selected == currentNode));
+	}
 }
