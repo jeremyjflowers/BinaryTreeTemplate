@@ -7,6 +7,12 @@ TreeNode::TreeNode(int value)
 	m_value = value;
 }
 
+TreeNode::~TreeNode()
+{
+	delete(m_left);
+	delete(m_right);
+}
+
 void TreeNode::draw(int x, int y, bool selected)
 {
 	//Creates an array to store the value converted to a string

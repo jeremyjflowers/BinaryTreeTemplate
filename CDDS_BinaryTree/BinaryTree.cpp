@@ -4,6 +4,7 @@
 
 BinaryTree::~BinaryTree()
 {
+	delete(m_root);
 }
 
 void BinaryTree::insert(int value)
@@ -83,7 +84,7 @@ void BinaryTree::remove(int value)
 	{
 		//Initialize two iterators to find the node whose data will be copied and its parent.
 		TreeNode* iterator1;
-		TreeNode* iterator2;
+		TreeNode* iterator2{};
 
 		//Set the first iterator to point to the right child of the node we want to remove.
 		iterator1 = currentNode->getRight();
@@ -99,33 +100,69 @@ void BinaryTree::remove(int value)
 		//end loop
 
 		//Once the smallest value has been found, copy the data in first iterator to the node we want to remove.
-		iterator1->getData();
-	}
+		currentNode->setData(iterator1->getData());
 
 		//Check if the second iterator has a left child.
+		if (iterator2->hasLeft())
+		{
 			//Check if the left child stores the same data as the node we wanted to remove.
+			if (iterator2->getLeft() == currentNode)
+			{
 				//Set the second iterators left child to be the first iterators right child.
+				iterator1->setRight(iterator2->getLeft());
+			}
+		}
 
 		//Check if the second iterator has a right child.
+		if (iterator2->hasRight())
+		{
 			//Check if the right child contains the same data as the node we want to remove.
+			if (iterator2->getRight() == currentNode)
+			{
 				//Set the right child of the second iterator to be the right child of the first iterator.
+				iterator1->setRight(iterator2->getRight());
+			}
+		}
 
 		//Delete the first iterator
+		delete(iterator1);
+	}
 
 	//Otherwise, if the node doesn't have a right child
-
+	else if (!currentNode->hasRight())
+	{
 		//check if the parent of the node to remove has a left child.
+		if (parentNode->hasLeft())
+		{
 			//Check if the data that the left child holds is the same as the data the node to remove holds.
+			if (parentNode->getLeft() == currentNode)
+			{
 				//Set the left child of the parent node to be the left child of the node to remove.
+				currentNode->setLeft(parentNode->getLeft());
+			}
+		}
 
 		//Check if the parent of the node to remove has a right child.
+		if (parentNode->hasRight())
+		{
 			//Check if the data the right child holds is the same as the data the node to remove holds.
+			if (parentNode->getRight() == currentNode)
+			{
 				//Set the right child of the parent node to be the left child of the node to remove.
+				currentNode->setLeft(parentNode->getRight());
+			}
+		}
 
 		//Check if the node we want to remove is the root.
+		if (currentNode = m_root)
+		{
 			//Set the root to be its left child.
+			currentNode->setLeft(m_root);
+		}
 
 		//Delete the pointer that points to the node to remove.
+		delete(currentNode);
+	}
 }
 
 TreeNode* BinaryTree::find(int value)
