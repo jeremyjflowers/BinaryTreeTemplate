@@ -1,3 +1,5 @@
 ﻿  BinaryTree.cpp
-C:\Users\s208044\Documents\Projects\BinaryTreeTemplate\CDDS_BinaryTree\BinaryTree.cpp(93,39): warning C4805: '==': unsafe mix of type 'bool' and type 'int' in operation
+C:\Users\s208044\Documents\Projects\BinaryTreeTemplate\CDDS_BinaryTree\BinaryTree.cpp(27,37): warning C4804: '>': unsafe use of type 'bool' in operation
+C:\Users\s208044\Documents\Projects\BinaryTreeTemplate\CDDS_BinaryTree\BinaryTree.cpp(36,38): warning C4804: '<': unsafe use of type 'bool' in operation
+C:\Users\s208044\Documents\Projects\BinaryTreeTemplate\CDDS_BinaryTree\BinaryTree.cpp(91,39): warning C4805: '==': unsafe mix of type 'bool' and type 'int' in operation
   CDDS_BinaryTree.vcxproj -> C:\Users\s208044\Documents\Projects\BinaryTreeTemplate\bin\x64\Debug\CDDS_BinaryTree.exe
