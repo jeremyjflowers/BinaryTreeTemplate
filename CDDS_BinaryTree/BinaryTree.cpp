@@ -75,7 +75,7 @@ void BinaryTree::remove(int value)
 	//Try to find the node that matches the value given and its parent in the tree.
 	findNode(value, currentNode, parentNode);
 	//If the node cannot be found return.
-	if (!find(value))
+	if (!findNode(value, currentNode, parentNode))
 		return;
 
 
